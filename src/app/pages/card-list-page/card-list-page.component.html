@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col">
+      <button routerLink="./new" class="btn btn-dark btn-block">New</button>
+    </div>
+  </div>
+  <div class="row row-cols-2">
+    <div class="col" *ngFor="let item of cardList|async">
+      <app-card-item [data]="item"></app-card-item>
+    </div>
+  </div>
+</div>

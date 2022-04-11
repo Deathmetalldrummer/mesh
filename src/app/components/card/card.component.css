@@ -1,0 +1,44 @@
+.card__image {
+  max-width: 100%;
+  padding-bottom: 1.5em;
+}
+.card__listImages {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+.card__listImages > li {
+  width: 25%;
+}
+.card__listImage {
+  display: block;
+  max-width: 100%;
+}
+
+.price {
+  font-size: 350%;
+}
+
+.stars ul {
+  display: inline-block;
+  list-style: none;
+  margin: 0 0 2em 0;
+  padding-left: 0;
+}
+.stars > ul > li {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+.stars svg {
+  max-width: 100%;
+}
+
+.card-btn {
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
