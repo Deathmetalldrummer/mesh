@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {delay, map, Observable, of} from 'rxjs';
+import {delay, Observable, of} from 'rxjs';
 import {HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse} from '@angular/common/http';
 import { data } from 'src/assets/data';
 
