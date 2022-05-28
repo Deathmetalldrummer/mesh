@@ -10,9 +10,12 @@
   list-style: none;
   margin: 0;
   padding-left: 0;
+  border: 1px solid #ccc;
 }
 .card__listImages > li {
   width: 25%;
+  border: 1px solid #ccc;
+  margin-right: 0.5em;
 }
 .card__listImage {
   display: block;

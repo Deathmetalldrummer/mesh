@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../http.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Card} from "../../interfaces";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-card',
@@ -9,14 +10,31 @@ import {Card} from "../../interfaces";
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  @Input() data: Card|null;
-  constructor(private httpService: HttpService, private router: Router) { }
+  id: number | undefined;
+  data$: Observable<Card>;
+  constructor(protected httpService: HttpService, protected route: ActivatedRoute, protected router: Router) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      if (this.id) {
+        this.initData(+this.id);
+      }
+    });
   }
 
-  onDelete(): void {
-    this.data && this.httpService.deleteCard(this.data.id)
+
+  initData(id: number): void {
+    this.data$ = this.httpService.getCard(id);
+  }
+
+  exit(type:string|null = null): void {
+    const url = type ? `/` : `card/${this.id}`;
+    this.router.navigate([url])
+  }
+
+  onDelete(id:number): void {
+    this.data$ && this.httpService.deleteCard(id)
       .subscribe(() => this.router.navigate(['/']));
   }
 }

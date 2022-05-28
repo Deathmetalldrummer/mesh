@@ -1,46 +1,43 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpService} from "../../http.service";
 import {Card} from "../../interfaces";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {CardComponent} from "../card/card.component";
 
 @Component({
   selector: 'app-card-edit',
   templateUrl: './card-edit.component.html',
   styleUrls: ['./card-edit.component.css']
 })
-export class CardEditComponent implements OnInit {
-  @Input() data: Card | null;
-
+export class CardEditComponent extends CardComponent implements OnInit {
   form: FormGroup = this.fb.group({
     title: ['', Validators.required],
     price: ['', Validators.required],
     description: ['', Validators.required],
   });
-  constructor(private fb: FormBuilder, private httpService: HttpService, private router: Router) {}
-
-  ngOnInit(): void {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.data = changes['data'].currentValue;
-    this.patchForm();
+  constructor(private fb: FormBuilder, httpService: HttpService, router: Router, route: ActivatedRoute) {
+    super(httpService, route, router);
   }
-  patchForm(): void {
+
+  override ngOnInit() {
+    super.ngOnInit();
+    this.data$.subscribe((item:Card): void => {
+      this.patchForm(item);
+    });
+  }
+
+  patchForm(data:Card): void {
     this.form.patchValue({
-      title: this.data?.title,
-      price: this.data?.price,
-      description: this.data?.description
+      title: data?.title,
+      price: data?.price,
+      description: data?.description
     })
   }
 
-  onSubmit(): void {
-    const payload: Card = {...this.data, ...this.form.value};
-    this.httpService.editCard(payload)
-      .subscribe(() => this.router.navigate(['card/' + this.data?.id]))
-  }
-
-  onDelete(): void {
-      this.data && this.httpService.deleteCard(this.data.id)
-        .subscribe(() => this.router.navigate(['/']))
+  onSubmit(payload:Card): void {
+    const _payload: Card = {...payload, ...this.form.value};
+    this.httpService.editCard(_payload)
+      .subscribe(() => this.router.navigate(['card/' + _payload?.id]))
   }
 }

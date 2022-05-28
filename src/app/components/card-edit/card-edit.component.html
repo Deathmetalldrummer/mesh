@@ -1,12 +1,7 @@
-<div class="container" *ngIf="data">
+<div class="container" *ngIf="data$|async as data">
   <form [formGroup]="form" class="row">
     <div class="col-6">
-      <img [src]="'./assets/' + data.image" alt="" class="card__image">
-      <ul class="card__listImages">
-        <li *ngFor="let image of data.images">
-          <img [src]="'./assets/' + image" alt="" class="card__listImage">
-        </li>
-      </ul>
+      <app-product-presentation [data]="data"></app-product-presentation>
     </div>
     <div class="col-6">
       <div class="form-group mb-3">
@@ -38,8 +33,8 @@
                   id="cardDescription" rows="6"></textarea>
       </div>
       <div class="form-group">
-        <button (click)="onSubmit()" [disabled]="form.invalid" type="submit" class="btn btn-dark btn-submit">Save</button>
-        <button (click)="onDelete()" *ngIf="this.data" type="button" class="btn btn-dark btn-submit">Delete</button>
+        <button (click)="onSubmit(data)" [disabled]="form.invalid" type="submit" class="btn btn-dark btn-submit">Save</button>
+        <button (click)="onDelete(data.id)" *ngIf="data" type="button" class="btn btn-dark btn-submit">Delete</button>
         <button type="button" routerLink="../" class="btn btn-dark btn-submit">Cancel</button>
       </div>
     </div>

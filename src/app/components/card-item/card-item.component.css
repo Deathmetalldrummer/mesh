@@ -1,4 +1,8 @@
+:host,
+.card {
+  height: 100%;
+}
 .card-image {
+  padding: 0.5em 0 0.5em 0.5em;
   max-width: 100%;
-  margin-left: 0.5em;
 }

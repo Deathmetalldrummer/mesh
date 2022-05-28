@@ -7,28 +7,21 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RequestInterceptor} from "./api/back.interceptor";
 import {ReactiveFormsModule} from "@angular/forms";
-import {CardListPageComponent} from './pages/card-list-page/card-list-page.component';
-import {CardEditPageComponent} from './pages/card-edit-page/card-edit-page.component';
-import {CardPageComponent} from './pages/card-page/card-page.component';
 import {CardComponent} from "./components/card/card.component";
 import {CardEditComponent} from "./components/card-edit/card-edit.component";
 import { CardCreateComponent } from './components/card-create/card-create.component';
-import { CardCreatePageComponent } from './pages/card-create-page/card-create-page.component';
+import { ProductPresentationComponent } from './components/product-presentation/product-presentation.component';
+import { CardListComponent } from './components/card-list/card-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CardListPageComponent,
-    CardPageComponent,
-    CardEditPageComponent,
     CardItemComponent,
-    CardListPageComponent,
-    CardEditPageComponent,
-    CardPageComponent,
     CardComponent,
     CardEditComponent,
     CardCreateComponent,
-    CardCreatePageComponent,
+    ProductPresentationComponent,
+    CardListComponent,
   ],
   imports: [
     BrowserModule,

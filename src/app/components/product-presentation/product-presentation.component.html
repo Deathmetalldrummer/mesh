@@ -1,0 +1,12 @@
+<div *ngIf="data" class="card__images adaptiveSquare"><div>
+  <img [src]="'./assets/images/' + (data.image || 'image_not_found.jpg')" alt="" class="card__image">
+</div></div>
+<ul *ngIf="data && data.images" class="card__listImages">
+  <li *ngFor="let image of data.images" (click)="changeMainImage(image)">
+    <div class="adaptiveSquare adaptiveSquare__listItem">
+      <div>
+        <img [src]="'./assets/images/' + image" alt="" class="card__listImage">
+      </div>
+    </div>
+  </li>
+</ul>

@@ -1,12 +1,7 @@
-<div class="container" *ngIf="data">
+<div class="container" *ngIf="data$|async as data">
   <div class="row">
     <div class="col-6">
-      <img [src]="'./assets/' + data.image" alt="" class="card__image">
-      <ul class="card__listImages">
-        <li *ngFor="let image of data.images">
-          <img [src]="'./assets/' + image" alt="" class="card__listImage">
-        </li>
-      </ul>
+      <app-product-presentation [data]="data"></app-product-presentation>
     </div>
     <div class="col-6">
       <h3 class="text-title">{{data.title}}</h3>
@@ -21,7 +16,8 @@
       <h5>Описание</h5>
       <p>{{data.description}}</p>
       <a routerLink="./edit" class="btn btn-dark card-btn">Edit</a>
-      <a (click)="onDelete()" class="btn btn-dark card-btn">Delete</a>
+      <a (click)="onDelete(data.id)" class="btn btn-dark card-btn">Delete</a>
+      <a routerLink="/" class="btn btn-dark card-btn">Cancel</a>
     </div>
   </div>
 </div>

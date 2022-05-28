@@ -1,9 +1,9 @@
-<div class="card mb-3">
-  <div class="row no-gutters">
-    <div class="col-md-5">
-      <img [src]="'./assets/' + data.image" [alt]="data.title" class="card-image mt-md-3">
+<div class="card">
+  <div class="row no-gutters align-content-stretch">
+    <div class="col-md-5" *ngIf="imageSize">
+      <img [src]="'./assets/images/' + (data.image || 'image_not_found.jpg')" [alt]="data.title" [style.maxHeight.px]="imageSize" class="card-image">
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7" #getSize>
       <div class="card-body">
         <h4 class="card-title">{{data.title}}</h4>
         <h5 class="card-title text-secondary">{{data.price}} ₽</h5>
